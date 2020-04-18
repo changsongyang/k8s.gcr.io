@@ -1,6 +1,3 @@
-# k8s.gcr.io
-解决k8s.gcr.io镜像问题
-
 ### cat pull-images.sh 
 #!/bin/bash
 images=(
