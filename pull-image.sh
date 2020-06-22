@@ -1,14 +1,16 @@
 ### cat pull-images.sh 
 #!/bin/bash
 
-#查看kubeadm安装，需要的
+#查看kubeadm安装，需要的镜像列表
 kubeadm config images list
 
+K8S-VERSION="v1.18.4"
+
 images=(
-    kube-apiserver:v1.18.3
-    kube-controller-manager:v1.18.3
-    kube-scheduler:v1.18.3
-    kube-proxy:v1.18.3
+    kube-apiserver:${K8S-VERSION}
+    kube-controller-manager:${K8S-VERSION}
+    kube-scheduler:${K8S-VERSION}
+    kube-proxy:${K8S-VERSION}
     pause:3.2
     etcd:3.4.3-0
     coredns:1.6.7
