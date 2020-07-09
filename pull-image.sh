@@ -1,25 +1,23 @@
-### cat pull-images.sh 
-#!/bin/bash
+kubeadm config images list > /root/kubeadm-config-images-list
 
-#查看kubeadm安装，需要的镜像列表
-kubeadm config images list
-
-K8S-VERSION="v1.18.4"
+#获取 pause,etcd,coredns的版本
+PauseVersion=`grep 'pause' /root/kubeadm-config-images-list |awk -F: '{print $2}'`
+EtcdVersion=`grep 'etcd' /root/kubeadm-config-images-list |awk -F: '{print $2}'`
+CorednsVersion=`grep 'coredns' /root/kubeadm-config-images-list |awk -F: '{print $2}'`
 
 images=(
-    kube-apiserver:${K8S-VERSION}
-    kube-controller-manager:${K8S-VERSION}
-    kube-scheduler:${K8S-VERSION}
-    kube-proxy:${K8S-VERSION}
-    pause:3.2
-    etcd:3.4.3-0
-    coredns:1.6.7
+    kube-apiserver:${vK8sVersion}
+    kube-controller-manager:${vK8sVersion}
+    kube-scheduler:${vK8sVersion}
+    kube-proxy:${vK8sVersion}
+    pause:${PauseVersion}
+    etcd:${EtcdVersion}
+    coredns:${CorednsVersion}
 )
 for imageName in ${images[@]};
 do
     docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/${imageName}
     docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/${imageName} k8s.gcr.io/${imageName}
-    docker rmi registry.cn-hangzhou.aliyuncs.com/google_containers/${imageName}
 done
 
 docker image ls
