@@ -1,3 +1,6 @@
+#!/bin/bash
+
+
 kubeadm config images list > /root/kubeadm-config-images-list
 
 #获取 pause,etcd,coredns的版本
