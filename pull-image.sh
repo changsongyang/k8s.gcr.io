@@ -3,6 +3,9 @@
 
 kubeadm config images list > /root/kubeadm-config-images-list
 
+#获取 k8s 版本
+vK8sVersion=`grep 'kube-apiserver' /root/kubeadm-config-images-list |awk -F: '{print $2}'`
+
 #获取 pause,etcd,coredns的版本
 PauseVersion=`grep 'pause' /root/kubeadm-config-images-list |awk -F: '{print $2}'`
 EtcdVersion=`grep 'etcd' /root/kubeadm-config-images-list |awk -F: '{print $2}'`
