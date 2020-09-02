@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 kubeadm config images list > /root/kubeadm-config-images-list
 
 #获取 k8s 版本
